@@ -1,0 +1,25 @@
+<mvc:View controllerName="com.sap.capacity.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns ="sap.m" >
+    <Page
+    id="page"
+    title="{i18n>title}"
+>
+    <content>
+        <VBox id="idVbox" justifyContent="Center" alignItems="Center">
+        <VBox id="vbox">
+            <Input id="idinput1" placeholder="" value=""/>
+            <Input id="idinput2" placeholder="" value=""/>
+            <Input id="idinput3" placeholder="" value=""/>
+            <Input id="idinput4" placeholder="" value=""/>
+            </VBox>
+            <HBox id="idHc" >
+            <Button id="idButton1" text="Create" press="onCreate" > </Button> 
+             <Button id="idButton2" text="Clear" press="onClear" > </Button> 
+             </HBox>
+        </VBox>
+        
+    </content>
+</Page>
+
+</mvc:View>

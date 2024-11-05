@@ -1,0 +1,6 @@
+id,orderDate,customerName,status
+ORD001,"2024-10-01","Alice Johnson","Pending"
+ORD002,"2024-10-02","Bob Smith","Completed"
+ORD003,"2024-10-03","Charlie Brown","Shipped"
+ORD004,"2024-10-04","Diana Prince","Cancelled"
+ORD005,"2024-10-05","Ethan Hunt","Pending"

@@ -1,0 +1,6 @@
+MaterialID,Description,UnitOfMeasure,ShapeType,SideLength,Length,Width,Radius,Thickness,Volume
+MAT001,"Wooden Block",kg,"Cube",50.00,,,,50.00,125000.00
+MAT002,"Steel Sheet",kg,"Rectangle",,"100.00",50.00,,5.00,25000.00
+MAT003,"Plastic Cylinder",liters,"Cylinder",,"30.00",,15.00,0.00,7068.58
+MAT004,"Glass Sphere",kg,"Sphere",,,,20.00,,3351.32
+MAT005,"Concrete Cone",tonnes,"Cone",,"30.00","30.00","10.00",0.00,1004.33
