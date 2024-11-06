@@ -1,25 +1,457 @@
-<mvc:View controllerName="com.sap.capacity.controller.Home"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns ="sap.m" >
-    <Page
-    id="page"
-    title="{i18n>title}"
+<mvc:View
+    controllerName="com.sap.capacity.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    height="100%"
+    xmlns:f="sap.ui.layout.form"
 >
-    <content>
-        <VBox id="idVbox" justifyContent="Center" alignItems="Center">
-        <VBox id="vbox">
-            <Input id="idinput1" placeholder="" value=""/>
-            <Input id="idinput2" placeholder="" value=""/>
-            <Input id="idinput3" placeholder="" value=""/>
-            <Input id="idinput4" placeholder="" value=""/>
-            </VBox>
-            <HBox id="idHc" >
-            <Button id="idButton1" text="Create" press="onCreate" > </Button> 
-             <Button id="idButton2" text="Clear" press="onClear" > </Button> 
-             </HBox>
-        </VBox>
-        
-    </content>
-</Page>
+    <!-- Tool Page Initialization -->
+    <tnt:ToolPage id="idtoolpage">
+        <!-- toolpage header -->
+        <tnt:header>
+            <tnt:ToolHeader id="idtoolheader">
+                <Title
+                    level="H1"
+                    text="Capacity Management"
+                    wrapping="false"
+                    id="idtitle"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData
+                            id="_IDGenOverflowToolbarLayoutData"
+                            priority="Disappear"
+                        />
+                    </layoutData>
+                </Title>
+                <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                <ToolbarSpacer id="spacer">
+                    <layoutData>
+                        <OverflowToolbarLayoutData
+                            id="_IDGenOverflowToolbarLayoutData1"
+                            priority="Low"
+                            group="1"
+                        />
+                    </layoutData>
+                </ToolbarSpacer>
+            </tnt:ToolHeader>
+        </tnt:header>
+        <!-- Tool page Subheader -->
+        <tnt:subHeader>
+            <tnt:ToolHeader id="idsubtoolheader">
+                <!-- Placing Icons Tab Header -->
+                <IconTabHeader
+                    id="_IDGenIconTabHeader"
+                    selectedKey="{/selectedKey}"
+                    items="{path: '/navigation'}"
+                    select=".onItemSelect"
+                    mode="Inline"
+                >
+                    <items>
+                        <IconTabFilter
+                            id="_IDGenIconTabFilter"
+                            text="{title}"
+                            key="{key}"
+                            icon="{icon}"
+                        />
+                    </items>
+                </IconTabHeader>
+                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                <HBox
+                    id="_IDGenHBox"
+                    justifyContent="End"
+                >
+                    <Button
+                        id="idUploadButton"
+                        text="Upload"
+                        icon="sap-icon://upload"
+                    />
+                    <Button
+                        id="idPrintButton"
+                        text="Print"
+                        icon="sap-icon://print"
+                    />
+                </HBox>
+            </tnt:ToolHeader>
+        </tnt:subHeader>
+        <!-- main page content -->
+        <tnt:mainContents>
+            <!-- Navigation container -->
+            <NavContainer
+                id="pageContainer"
+                initialPage="page2"
+            >
+                <pages>
+                    <ScrollContainer
+                        id="page1"
+                        class="sapUiContentPadding"
+                    >
+                        <Title
+                            id="idPageTitle_Home"
+                            text="Add Product Screen"
+                            level="H2"
+                        />
+                        <HBox
+                            id="_idhbox_unknw_Home"
+                            alignItems="Center"
+                            class="sapUiTinyMarginTop"
+                            justifyContent="Center"
+                        >
+                            <Label
+                                id="_IDGenLabel1_Home"
+                                text="Product"
+                                class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                            />
+                            <Input
+                                id="_IDGenInput1_Home"
+                                placeholder="Enter Product"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Button
+                                id="idSimulateBtn"
+                                text="Simulate"
+                                icon="sap-icon://simulate"
+                                class="sapUiSmallMarginBegin"
+                            />
+                            <Button
+                                id="idSaveBtn"
+                                text="Save"
+                                icon="sap-icon://save"
+                                class="sapUiSmallMarginBegin"
+                            />
+                        </HBox>
+                        <!-- Form for measures -->
+                        <VBox
+                            id="idVboxMeas"
+                            class="sapUiLargeMarginTop"
+                        >
+                            <HBox id="idhboxMeas">
+                                <f:SimpleForm
+                                    id="simpleForm_UBYD"
+                                    width="40vw"
+                                >
+                                    <Label
+                                        id="_IDGenLabHome"
+                                        text="EAN/UPC"
+                                        class="sapUiTinyMarginTop"
+                                    />
 
+                                    <Input
+                                        id="_IDGenInpHome"
+                                        placeholder="Enter EAN/UPC"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+                                    <Label
+                                        id="_IDGabHome"
+                                        text="SAP product Code"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenInpHome"
+                                        placeholder="Enter SAP product Code"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+
+                                    <Label
+                                        id="_IDGbHome"
+                                        text="Length"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd "
+                                    />
+                                    <Input
+                                        id="_IDenISDnpHome"
+                                        placeholder="Enter Length"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+
+                                    <Label
+                                        id="_IDGadsfbHome"
+                                        text="Width"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenIasSDnpHome"
+                                        placeholder="Enter Width"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+
+                                    <Label
+                                        id="_IDGadsfbsdHome"
+                                        text="Height"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenIasSsdcDnpHome"
+                                        placeholder="Enter Height"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+
+                                    <Label
+                                        id="_IDGdadsfbsdHome"
+                                        text="Volume"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenIsdasSsdcDnpHome"
+                                        placeholder="Enter Volume"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+
+                                    <Label
+                                        id="_IDGdadsfwsbsdHome"
+                                        text="Gross Weight"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenddIsdasSsdcDnpHome"
+                                        placeholder="Enter Gross Weight"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+
+                                    <Label
+                                        id="_IDGddsadsfwsbsdHome"
+                                        text="Net Weight"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenddIssdasSsdcDnpHome"
+                                        placeholder="Enter Net Weight"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                    />
+                                </f:SimpleForm>
+                            </HBox>
+                        </VBox>
+                    </ScrollContainer>
+                    <!-- Scroll Container for 2nd Screen -->
+                    <ScrollContainer
+                        id="page2"
+                        class="sapUiContentPadding"
+                    >
+                        <VBox
+                            id="_IDGenVBox1"
+                            class="sapUiSmallMargin"
+                        >
+                            <f:SimpleForm
+                                id="SimpleFormDisplay354"
+                                editable="false"
+                                layout="ResponsiveGridLayout"
+                                title=""
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                            >
+                                <f:content>
+                                    <Label
+                                        id="_IDGenLabel"
+                                        text="Vehicle Type"
+                                    />
+                                    <Input
+                                        id="nameText"
+                                        value=""
+                                        showSuggestion="true"
+                                        showValueHelp="true"
+                                        valueHelpRequest=".onValueHelpRequest"
+                                    />
+                                    <Label
+                                        id="_IDGenLabel1"
+                                        text="Product"
+                                    />
+                                    <Input
+                                        id="_IDGenInput"
+                                        value=""
+                                    />
+                                    <Label
+                                        id="_IDGenLabel2"
+                                        text="Quantity"
+                                    />
+                                    <Input
+                                        id="_IDGenInput1"
+                                        value=""
+                                    />
+                                    <Input
+                                        id="_IDGenInput2"
+                                        value=""
+                                    />
+                                </f:content>
+                            </f:SimpleForm>
+
+                            <!-- New HBox for the table and container -->
+                            <HBox
+                                id="_IDGenHBox1"
+                                class="sapUiSmallMarginTop"
+                            >
+                                <VBox
+                                    id="_IDGenVBox2"
+                                    class="leftContainer"
+                                    width="30%"
+                                >
+                                    <Table
+                                        id="myTable"
+                                        items="{/yourItemsPath}"
+                                    >
+                                        <columns>
+                                            <Column id="_IDGenColumn">
+                                                <Text
+                                                    id="_IDGenText"
+                                                    text="Field 1"
+                                                />
+                                            </Column>
+                                            <Column id="_IDGenColumn1">
+                                                <Text
+                                                    id="_IDGenText1"
+                                                    text="Field 2"
+                                                />
+                                            </Column>
+                                            <Column id="_IDGenColumn2">
+                                                <Text
+                                                    id="_IDGenText2"
+                                                    text="Field 3"
+                                                />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem
+                                                id="_IDGenColumnListItem"
+                                            >
+                                                <cells>
+                                                    <Text
+                                                        id="_IDGenText3"
+                                                        text="{field1}"
+                                                    />
+                                                    <Text
+                                                        id="_IDGenText4"
+                                                        text="{field2}"
+                                                    />
+                                                    <Text
+                                                        id="_IDGenText5"
+                                                        text="{field3}"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </VBox>
+                                <VBox
+                                    id="_IDGenVBox3"
+                                    width="3%"
+                                />
+                                <VBox
+                                    id="_IDGenVBox4"
+                                    class="rightContainer"
+                                    width="67%"
+                                >
+                                    <TextArea
+                                        id="_IDGenTextArea"
+                                        rows="19"
+                                        cols="130"
+                                    />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </ScrollContainer>
+                    <!-- Scroll Container for 3rd Screen -->
+                    <ScrollContainer
+                        id="page3"
+                        class="sapUiContentPadding"
+                    >
+                        <Text
+                            id="idtextupload"
+                            text="Upload"
+                        />
+                    </ScrollContainer>
+                    <!-- Scroll Container for 4th Screen-->
+                    <ScrollContainer
+                        id="page4"
+                        class="sapUiContentPadding"
+                    >
+                        <Text
+                            id="idtextlist"
+                            text="List"
+                        />
+                    </ScrollContainer>
+                    <!-- Scroll Container for 5th Screen -->
+                    <ScrollContainer
+                        id="page5"
+                        class="sapUiContentPadding"
+                    >
+                        <Text
+                            id="idtextsave"
+                            text="Save"
+                        />
+                    </ScrollContainer>
+                    <!-- Scroll Container for 6th Screen -->
+                    <ScrollContainer
+                        id="page6"
+                        class="sapUiContentPadding"
+                    >
+                        <Text
+                            id="idvehicletype"
+                            text="Add Vehicle type"
+                        />
+                    </ScrollContainer>
+                    <!-- Scroll Container for 7th Screen -->
+                    <ScrollContainer
+                        id="page7"
+                        class="sapUiContentPadding"
+                    >
+                        <Title
+                            id="idtitle7thpage"
+                            text="List of Tables"
+                        />
+                        
+                        <Table
+                            id="idTable1"
+                            items="{/Material}"
+                            growing="true"
+                            growingThreshold="5"
+                        >
+                        <headerToolbar>
+                        <OverflowToolbar id="idover">
+                        <ToolbarSpacer id="idttoo"></ToolbarSpacer>
+                        <Button id="iddd" text="add" press="onadd">
+                        </Button></OverflowToolbar>
+                        </headerToolbar>
+                        
+                            <columns>
+                                <Column id="idtab1col1">
+                                    <Title
+                                        id="idtab1title1"
+                                        text="Material"
+                                    />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem id="idcollist1">
+                                    <cells>
+                                        <Text
+                                            id="idtab1text1"
+                                            text="{MaterialID}"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </ScrollContainer>
+                </pages>
+            </NavContainer>
+        </tnt:mainContents>
+    </tnt:ToolPage>
 </mvc:View>

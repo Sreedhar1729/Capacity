@@ -5,4 +5,5 @@ service CatalogService @(path: 'Cap') {
     entity Orders     as projection on my.Orders;
     entity OrderItems as projection on my.OrderItems;
     entity Vehicle    as projection on my.Vehicle;
+    entity VehicleLoad as projection on my.VehicleLoad;
 }

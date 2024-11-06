@@ -48,3 +48,11 @@ entity Vehicle {
         type         : String; // Type of vehicle (e.g., Truck, Van)
         capacity     : Integer; // Maximum capacity of the vehicle (e.g., weight limit)
 }
+
+/** Defining VehicleLoad entity */
+entity VehicleLoad {
+    key id          : UUID; // Unique identifier for each vehicle load entry
+    vehicle        : Association to Vehicle; // Reference to the associated vehicle
+    orderItem      : Association to OrderItems; // Reference to the associated order item
+    loadedQuantity  : Integer; // Quantity of the order item loaded into the vehicle
+}
