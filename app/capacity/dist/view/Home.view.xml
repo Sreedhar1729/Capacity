@@ -43,17 +43,17 @@
                 <!-- Placing Icons Tab Header -->
                 <IconTabHeader
                     id="_IDGenIconTabHeader"
-                    selectedKey="{oJson>/selectedKey}"
-                    items="{path: 'oJson>/navigation'}"
+                    selectedKey="{/selectedKey}"
+                    items="{path: '/navigation'}"
                     select=".onItemSelect"
                     mode="Inline"
                 >
                     <items>
                         <IconTabFilter
                             id="_IDGenIconTabFilter"
-                            text="{oJson>title}"
-                            key="{oJson>key}"
-                            icon="{oJson>icon}"
+                            text="{title}"
+                            key="{key}"
+                            icon="{icon}"
                         />
                     </items>
                 </IconTabHeader>
@@ -303,7 +303,10 @@
                                     class="leftContainer"
                                     width="30%"
                                 >
-                                    <Table id="myTable">
+                                    <Table
+                                        id="myTable"
+                                        items="{/yourItemsPath}"
+                                    >
                                         <columns>
                                             <Column id="_IDGenColumn">
                                                 <Text
@@ -413,80 +416,36 @@
                             id="idtitle7thpage"
                             text="List of Tables"
                         />
-                        <VBox id="idvboxtable1">
-                            <Table
-                                id="idTable1"
-                                items="{newModel>/Material}"
-                            >
-                                <headerToolbar>
-                                    <OverflowToolbar id="idover">
-                                        <ToolbarSpacer id="idttoo" />
-                                        <Button
-                                            id="iddd"
-                                            text="add"
-                                            press="onadd"
-                                        />
-                                    </OverflowToolbar>
-                                </headerToolbar>
-
-                                <columns>
-                                    <Column id="idtab1col1">
-                                        <Title
-                                            id="idtab1title1"
-                                            text="Material"
-                                        />
-                                    </Column>
-                                    <Column id="idCol2">
-                                        <Title
-                                            id="idtab1title2"
-                                            text="Description"
-                                        />
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem id="idcollist1">
-                                        <cells>
-                                            <Text
-                                                id="idtab1text1"
-                                                text="{newModel>MaterialID}"
-                                            />
-                                            <Text
-                                                id="idtab1text2"
-                                                text="{newModel>Description}"
-                                            />
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </VBox>
+                        
                         <Table
-                            id="idtable2"
-                            items="{newModel>/Orders}"
+                            id="idTable1"
+                            items="{/Material}"
+                            growing="true"
+                            growingThreshold="5"
                         >
+                        <headerToolbar>
+                        <OverflowToolbar id="idover">
+                        <ToolbarSpacer id="idttoo"></ToolbarSpacer>
+                        <Button id="iddd" text="add" press="onadd">
+                        </Button></OverflowToolbar>
+                        </headerToolbar>
+                        
                             <columns>
-                                <Column id="idtab2col1">
+                                <Column id="idtab1col1">
                                     <Title
-                                        id="idtab2titl1"
-                                        text="orderID"
-                                    />
-                                </Column>
-                                <Column id="idtab2col2">
-                                    <Title
-                                        id="idtab2titl2"
-                                        text="Date"
+                                        id="idtab1title1"
+                                        text="Material"
                                     />
                                 </Column>
                             </columns>
                             <items>
-                                <ColumnListItem id="idtab2colli1">
-                                    <Text
-                                        id="idtab2text"
-                                        text="{newModel>id}"
-                                    />
-                                    <Text
-                                        id="idtab2text2"
-                                        text="{newModel>orderDate}"
-                                    />
+                                <ColumnListItem id="idcollist1">
+                                    <cells>
+                                        <Text
+                                            id="idtab1text1"
+                                            text="{MaterialID}"
+                                        />
+                                    </cells>
                                 </ColumnListItem>
                             </items>
                         </Table>

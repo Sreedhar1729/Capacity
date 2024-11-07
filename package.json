@@ -7,14 +7,16 @@
   "private": true,
   "dependencies": {
     "@cap-js/hana": "^1",
-    "@sap/cds": "^8",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
-    "express": "^4"
+    "@sap/cds": "^8.4.0",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.7",
+    "@sap/xssec": "^4",
+    "express": "^4.21.1",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.6",
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8",
+    "@sap/cds-dk": "^8.4.0",
     "@sap/ux-specification": "UI5-1.130",
     "rimraf": "^5.0.5"
   },
@@ -40,7 +42,8 @@
     "requires": {
       "db": {
         "kind": "hana-cloud"
-      }
+      },
+      "auth": "dummy"
     }
   }
 }

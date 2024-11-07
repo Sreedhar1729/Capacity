@@ -12,15 +12,7 @@ function (Controller,ResourceBundle,JSONModel,ODataModel) {
     return Controller.extend("com.sap.capacity.controller.Home", {
         onInit: function () {
            // Define navigation data directly in the controller
-          
-          // Create and set the OData model
-          var sServiceUrl = "/v2/odata/v4/Cap/"; // Replace with your OData service URL
-          var oODataModel = new ODataModel(sServiceUrl);
-          this.getView().byId("pageContainer").setModel(oODataModel,"newModel");
-        //   this.getView().byId("idtoolpage").setModel(oODataModel,"newModel");
-        //   this.getView().byId("idTable1").setModel(oODataModel,"newModel");
-       
-          var oData = {
+           var oData = {
             selectedKey: "page2",
             navigation: [
                 {
@@ -58,11 +50,8 @@ function (Controller,ResourceBundle,JSONModel,ODataModel) {
         };
 
         var oModel = new JSONModel(oData);
-        this.getView().setModel(oModel,"oJson");
+        this.getView().setModel(oModel);
 
-        // var oModelV2 = this.getOwnerComponent().getModel("ModelV2")
-        // this.getView().byId("idTable1").setModel(oModelV2);
-        // console.log( this.getView().byId("idTable1").getModel());
         // Device.media.attachHandler(this._handleMediaChange, this);
         // this._handleMediaChange();
         },
@@ -123,28 +112,13 @@ function (Controller,ResourceBundle,JSONModel,ODataModel) {
             }
         },
         onadd: function (oEvent) {
-            let oModel = this.getOwnerComponent().getModel("oModel");
+            let oModel = this.getOwnerComponent().getModel();
             let oBindList = oModel.bindList("/Material");
             oBindList.requestContexts().then(function (aContexts) {
                 aContexts.forEach(oContext => {
                     console.log(oContext.getObject());
                 });
             });
-        },
-        getMaterialData: function() {
-            var oModel = this.getView().getModel("oData");
-            oModel.read("/Material", {
-               
-                success: function(oData) {
-                    console.log("Fetched material data:", oData);
-                    // Assuming oData.results contains an array of materials
-                    var oMaterialModel = new JSONModel(oData.results);
-                    this.getView().setModel(oMaterialModel, "materialModel"); // Set a new model for materials
-                }.bind(this),
-                error: function(oError) {
-                    console.error("Error fetching material data:", oError);
-                }
-            });
-        },
+        }
     });
 });
