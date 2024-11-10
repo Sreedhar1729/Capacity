@@ -148,7 +148,7 @@ sap.ui.define([
             onCreateMaterial: function () {
                 const oPmodel = this.getView().getModel("oMaterial"),
                     oPayload = oPmodel.getProperty("/");
-            
+
                 /** Formatting the entered values */
                 const formatValue = (value) => {
                     if (typeof value === 'string') {
@@ -159,7 +159,7 @@ sap.ui.define([
                         return "0.00";
                     }
                 };
-            
+
                 // Formatting all values using the helper function
                 const oSideLength = formatValue(oPayload.SideLength);
                 const oLength = formatValue(oPayload.Length);
@@ -167,13 +167,13 @@ sap.ui.define([
                 const oRadius = formatValue(oPayload.Radius);
                 const oThickness = formatValue(oPayload.Thickness);
                 const oShape = this.byId("idshapes").getSelectedItem().getKey();
-            
+
                 // Calculate Volume using the onVolume function
                 const calculatedVolume = this.onVolume(oShape, oSideLength, oLength, oWidth, oRadius, oThickness);
-            
+
                 // Assign calculated volume to payload
                 oPayload.Volume = calculatedVolume;
-            
+
                 // Passing formatted data back to the payload
                 oPayload.SideLength = oSideLength;
                 oPayload.Length = oLength;
@@ -181,7 +181,7 @@ sap.ui.define([
                 oPayload.Radius = oRadius;
                 oPayload.Thickness = oThickness;
                 oPayload.ShapeType = oShape;
-            
+
                 const oModel = this.getView().byId("pageContainer").getModel("newModel");
                 var that = this;
                 /** Creating material data */
@@ -189,7 +189,7 @@ sap.ui.define([
                     success: function (odata) {
                         console.log(odata);
                         sap.m.MessageBox.success("Created Successfully");
-                        
+
                         // Clear input fields after successful creation
                         oPmodel.setProperty("/", {
                             MaterialID: "",
@@ -204,8 +204,8 @@ sap.ui.define([
                             // Volume: ""
                         });
                         // Reset the selected shape in the UI
-            that.byId("idshapes").setSelectedKey("");
-            that.onShapeChange();
+                        that.byId("idshapes").setSelectedKey("");
+                        that.onShapeChange();
                     },
                     error: function (oError) {
                         sap.m.MessageBox.error("Error creating material"); // Corrected error message
@@ -265,7 +265,7 @@ sap.ui.define([
             },
             onVolume: function (shapeType, sideLength, length, width, radius, thickness) {
                 let volume = 0;
-            
+
                 switch (shapeType) {
                     case "Square":
                         volume = Math.pow(parseFloat(sideLength), 2); // Area
@@ -295,7 +295,7 @@ sap.ui.define([
                         volume = 0; // Default case if shape is not recognized
                         break;
                 }
-            
+
                 return volume.toFixed(2); // Return formatted volume
             }
         });
