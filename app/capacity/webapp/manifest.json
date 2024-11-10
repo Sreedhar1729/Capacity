@@ -68,7 +68,7 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
           "bundleName": "com.sap.capacity.i18n.i18n",
-          "supportedLocales": [],
+          "supportedLocales": ["en","de","te"],
           "fallbackLocale": ""
         }
       },

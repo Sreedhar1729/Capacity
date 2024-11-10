@@ -4,6 +4,7 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:tnt="sap.tnt"
+    xmlns:t="sap.ui.core"
     height="100%"
     xmlns:f="sap.ui.layout.form"
 >
@@ -14,7 +15,7 @@
             <tnt:ToolHeader id="idtoolheader">
                 <Title
                     level="H1"
-                    text="Capacity Management"
+                    text="{i18n>title}"
                     wrapping="false"
                     id="idtitle"
                 >
@@ -106,6 +107,7 @@
                             <Input
                                 id="_IDGenInput1_Home"
                                 placeholder="Enter Product"
+                                value="{oMaterial>/MaterialID}"
                                 class="sapUiSmallMarginEnd"
                             />
                             <Button
@@ -119,6 +121,7 @@
                                 text="Save"
                                 icon="sap-icon://save"
                                 class="sapUiSmallMarginBegin"
+                                press="onCreateMaterial"
                             />
                         </HBox>
                         <!-- Form for measures -->
@@ -133,98 +136,160 @@
                                 >
                                     <Label
                                         id="_IDGenLabHome"
-                                        text="EAN/UPC"
+                                        text="Description"
                                         class="sapUiTinyMarginTop"
                                     />
 
                                     <Input
                                         id="_IDGenInpHome"
-                                        placeholder="Enter EAN/UPC"
+                                        placeholder="Enter Description"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
+                                        value="{oMaterial>/Description}"
                                     />
                                     <Label
                                         id="_IDGabHome"
-                                        text="SAP product Code"
+                                        text="UnitOfMeasure"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
                                     />
                                     <Input
                                         id="_IDenInpHome"
-                                        placeholder="Enter SAP product Code"
+                                        placeholder="Enter UOM"
+                                        value="{oMaterial>/UnitOfMeasure}"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
                                     />
 
                                     <Label
                                         id="_IDGbHome"
-                                        text="Length"
+                                        text="ShapeType"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd "
                                     />
-                                    <Input
-                                        id="_IDenISDnpHome"
-                                        placeholder="Enter Length"
+
+                                    <Select
+                                        id="idshapes"
+                                        width="48%"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
-                                        width="15vw"
-                                    />
+                                        change="onShapeChange"
+                                    >
+                                        <t:Item
+                                            id="iditem0"
+                                            key=""
+                                            text=""
+                                        />
+                                        <t:Item
+                                            id="iditem"
+                                            key="Circle"
+                                            text="Circle"
+                                        />
+                                        <t:Item
+                                            id="iditem1"
+                                            key="Square"
+                                            text="Square"
+                                        />
+                                        <t:Item
+                                            id="iditem2"
+                                            key="Rectangle"
+                                            text="Rectangle"
+                                        />
+                                        <t:Item
+                                            id="iditem3"
+                                            key="Cube"
+                                            text="Cube"
+                                        />
+                                        <t:Item
+                                            id="iditem4"
+                                            key="Cylinder"
+                                            text="Cylinder"
+                                        />
+                                        <t:Item
+                                            id="iditem5"
+                                            key="Sphere"
+                                            text="Sphere"
+                                        />
+                                        <t:Item
+                                            id="iditem6"
+                                            key="Cone"
+                                            text="Cone"
+                                        />
+                                    </Select>
 
                                     <Label
                                         id="_IDGadsfbHome"
-                                        text="Width"
+                                        text="SideLength"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
                                     />
                                     <Input
                                         id="_IDenIasSDnpHome"
-                                        placeholder="Enter Width"
+                                        placeholder="Enter SideLength"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
+                                        value="{oMaterial>/SideLength}"
                                     />
 
                                     <Label
                                         id="_IDGadsfbsdHome"
-                                        text="Height"
+                                        text="Length"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
                                     />
                                     <Input
                                         id="_IDenIasSsdcDnpHome"
                                         placeholder="Enter Height"
+                                        value="{oMaterial>/Length}"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
                                     />
 
                                     <Label
                                         id="_IDGdadsfbsdHome"
-                                        text="Volume"
+                                        text="Width"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
                                     />
                                     <Input
                                         id="_IDenIsdasSsdcDnpHome"
-                                        placeholder="Enter Volume"
+                                        placeholder="Enter Width"
+                                        value="{oMaterial>/Width}"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
                                     />
 
                                     <Label
                                         id="_IDGdadsfwsbsdHome"
-                                        text="Gross Weight"
+                                        text="Radius"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
                                     />
                                     <Input
                                         id="_IDenddIsdasSsdcDnpHome"
-                                        placeholder="Enter Gross Weight"
+                                        placeholder="Enter Radius"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
+                                        value="{oMaterial>/Radius}"
                                     />
 
                                     <Label
                                         id="_IDGddsadsfwsbsdHome"
-                                        text="Net Weight"
+                                        text="Thickness"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
                                     />
                                     <Input
                                         id="_IDenddIssdasSsdcDnpHome"
-                                        placeholder="Enter Net Weight"
+                                        placeholder="Enter Thickness"
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
+                                        value="{oMaterial>/Thickness}"
+                                    />
+
+                                    <Label
+                                        id="_IDGddsadsfwsbsdHome1"
+                                        text="Volume"
+                                        class="sapUiTinyMarginTop sapUiTinyMarginEnd"
+                                    />
+                                    <Input
+                                        id="_IDenddIssdasSsdcDnpHome1"
+                                        placeholder="Enter Volume"
+                                        class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
+                                        width="15vw"
+                                        value="{oMaterial>/Volume}"
                                     />
                                 </f:SimpleForm>
                             </HBox>
@@ -407,6 +472,10 @@
                     <!-- Scroll Container for 7th Screen -->
                     <ScrollContainer
                         id="page7"
+                        width="100%"
+                        height="100%"
+                        horizontal="false"
+                        vertical="true"
                         class="sapUiContentPadding"
                     >
                         <Title
@@ -414,9 +483,15 @@
                             text="List of Tables"
                         />
                         <VBox id="idvboxtable1">
+                            <Title
+                                id="idtable1title"
+                                text="Materials"
+                            />
                             <Table
                                 id="idTable1"
                                 items="{newModel>/Material}"
+                                growing="true"
+                                growingThreshold="5"
                             >
                                 <headerToolbar>
                                     <OverflowToolbar id="idover">
@@ -424,7 +499,7 @@
                                         <Button
                                             id="iddd"
                                             text="add"
-                                            press="onadd"
+                                            press="getShapeTypes"
                                         />
                                     </OverflowToolbar>
                                 </headerToolbar>
@@ -459,37 +534,45 @@
                                 </items>
                             </Table>
                         </VBox>
-                        <Table
-                            id="idtable2"
-                            items="{newModel>/Orders}"
-                        >
-                            <columns>
-                                <Column id="idtab2col1">
-                                    <Title
-                                        id="idtab2titl1"
-                                        text="orderID"
-                                    />
-                                </Column>
-                                <Column id="idtab2col2">
-                                    <Title
-                                        id="idtab2titl2"
-                                        text="Date"
-                                    />
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem id="idtab2colli1">
-                                    <Text
-                                        id="idtab2text"
-                                        text="{newModel>id}"
-                                    />
-                                    <Text
-                                        id="idtab2text2"
-                                        text="{newModel>orderDate}"
-                                    />
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                        <VBox id="idtable2VbOX">
+                            <Title
+                                id="idtable2title"
+                                text="Orders"
+                            />
+                            <Table
+                                id="idtable2"
+                                items="{newModel>/Orders}"
+                                growing="true"
+                                growingThreshold="5"
+                            >
+                                <columns>
+                                    <Column id="idtab2col1">
+                                        <Title
+                                            id="idtab2titl1"
+                                            text="orderID"
+                                        />
+                                    </Column>
+                                    <Column id="idtab2col2">
+                                        <Title
+                                            id="idtab2titl2"
+                                            text="Date"
+                                        />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="idtab2colli1">
+                                        <Text
+                                            id="idtab2text"
+                                            text="{newModel>id}"
+                                        />
+                                        <Text
+                                            id="idtab2text2"
+                                            text="{newModel>orderDate}"
+                                        />
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
                     </ScrollContainer>
                 </pages>
             </NavContainer>
