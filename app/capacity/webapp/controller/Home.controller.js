@@ -183,7 +183,7 @@ sap.ui.define([
                 oPayload.ShapeType = oShape;
             
                 const oModel = this.getView().byId("pageContainer").getModel("newModel");
-                
+                var that = this;
                 /** Creating material data */
                 oModel.create("/Material", oPayload, {
                     success: function (odata) {
@@ -203,6 +203,9 @@ sap.ui.define([
                             Thickness: "",
                             // Volume: ""
                         });
+                        // Reset the selected shape in the UI
+            that.byId("idshapes").setSelectedKey("");
+            that.onShapeChange();
                     },
                     error: function (oError) {
                         sap.m.MessageBox.error("Error creating material"); // Corrected error message
@@ -210,9 +213,9 @@ sap.ui.define([
                 });
             },
             /** Based on Shape blocking input fields */
-            onShapeChange: function (oEvent) {
+            onShapeChange: function () {
                 // Get the selected item from the event parameters
-                var oSelectedItem = oEvent.getParameter("selectedItem");
+                var oSelectedItem = this.byId("idshapes").getSelectedItem();
                 var sSelectedKey = oSelectedItem ? oSelectedItem.getKey() : "";
 
                 /** Getting all references */
