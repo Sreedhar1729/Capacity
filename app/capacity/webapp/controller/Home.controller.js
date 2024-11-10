@@ -69,7 +69,7 @@ sap.ui.define([
                     Width: "",
                     Radius: "",
                     Thickness: "",
-                    Volume: ""
+                    // Volume: ""
                 }
                 );
                 /**Setting named model */
@@ -146,17 +146,68 @@ sap.ui.define([
                 });
             },
             onCreateMaterial: function () {
-                const oPayload = this.getView().getModel("oMaterial").getProperty("/"),
-                    oModel = this.getView().byId("pageContainer").getModel("newModel");
+                const oPmodel = this.getView().getModel("oMaterial"),
+                    oPayload = oPmodel.getProperty("/");
+            
+                /** Formatting the entered values */
+                const formatValue = (value) => {
+                    if (typeof value === 'string') {
+                        return value ? parseFloat(value.replace(',', '.')).toFixed(2) : "0.00";
+                    } else if (typeof value === 'number') {
+                        return value.toFixed(2);
+                    } else {
+                        return "0.00";
+                    }
+                };
+            
+                // Formatting all values using the helper function
+                const oSideLength = formatValue(oPayload.SideLength);
+                const oLength = formatValue(oPayload.Length);
+                const oWidth = formatValue(oPayload.Width);
+                const oRadius = formatValue(oPayload.Radius);
+                const oThickness = formatValue(oPayload.Thickness);
+                const oShape = this.byId("idshapes").getSelectedItem().getKey();
+            
+                // Calculate Volume using the onVolume function
+                const calculatedVolume = this.onVolume(oShape, oSideLength, oLength, oWidth, oRadius, oThickness);
+            
+                // Assign calculated volume to payload
+                oPayload.Volume = calculatedVolume;
+            
+                // Passing formatted data back to the payload
+                oPayload.SideLength = oSideLength;
+                oPayload.Length = oLength;
+                oPayload.Width = oWidth;
+                oPayload.Radius = oRadius;
+                oPayload.Thickness = oThickness;
+                oPayload.ShapeType = oShape;
+            
+                const oModel = this.getView().byId("pageContainer").getModel("newModel");
+                
+                /** Creating material data */
                 oModel.create("/Material", oPayload, {
                     success: function (odata) {
                         console.log(odata);
                         sap.m.MessageBox.success("Created Successfully");
+                        
+                        // Clear input fields after successful creation
+                        oPmodel.setProperty("/", {
+                            MaterialID: "",
+                            Description: "",
+                            UnitOfMeasure: "",
+                            ShapeType: "",
+                            SideLength: "",
+                            Length: "",
+                            Width: "",
+                            Radius: "",
+                            Thickness: "",
+                            // Volume: ""
+                        });
                     },
                     error: function (oError) {
-                        sap.m.MessageBox.error("Created Successfully");
+                        sap.m.MessageBox.error("Error creating material"); // Corrected error message
                     }
-                })
+                });
             },
             /** Based on Shape blocking input fields */
             onShapeChange: function (oEvent) {
@@ -170,7 +221,7 @@ sap.ui.define([
                 var oWidth = this.byId("_IDenIsdasSsdcDnpHome"); // Width (for Rectangle)
                 var oRadius = this.byId("_IDenddIsdasSsdcDnpHome"); // Radius (for Circle/Cylinder/Sphere/Cone)
                 var oThickness = this.byId('_IDenddIssdasSsdcDnpHome'); // Thickness
-                var oVolume = this.byId("_IDenddIssdasSsdcDnpHome1"); // Volume display
+                // var oVolume = this.byId("_IDenddIssdasSsdcDnpHome1"); // Volume display
 
                 // Define visibility settings for each shape
                 var visibilitySettings = {
@@ -189,7 +240,7 @@ sap.ui.define([
                     oWidth.setVisible(true);
                     oRadius.setVisible(true);
                     oThickness.setVisible(true);
-                    oVolume.setVisible(true); // Optionally show volume field as well
+                    // oVolume.setVisible(true); // Optionally show volume field as well
                     return; // Exit the function early
                 }
 
@@ -208,7 +259,41 @@ sap.ui.define([
                 oWidth.setVisible(currentVisibility.Width); // Corrected case
                 oRadius.setVisible(currentVisibility.Radius); // Corrected case
                 oThickness.setVisible(currentVisibility.Thickness); // Corrected case
-
+            },
+            onVolume: function (shapeType, sideLength, length, width, radius, thickness) {
+                let volume = 0;
+            
+                switch (shapeType) {
+                    case "Square":
+                        volume = Math.pow(parseFloat(sideLength), 2); // Area
+                        break;
+                    case "Rectangle":
+                        volume = parseFloat(length) * parseFloat(width); // Area
+                        break;
+                    case "Cube":
+                        volume = Math.pow(parseFloat(sideLength), 3); // Volume
+                        break;
+                    case "Cylinder":
+                        volume = Math.PI * Math.pow(parseFloat(radius), 2) * parseFloat(length); // Volume
+                        break;
+                    case "Sphere":
+                        volume = (4 / 3) * Math.PI * Math.pow(parseFloat(radius), 3); // Volume
+                        break;
+                    case "Cone":
+                        volume = (1 / 3) * Math.PI * Math.pow(parseFloat(radius), 2) * parseFloat(length); // Volume
+                        break;
+                    case "Circle":
+                        volume = Math.PI * Math.pow(parseFloat(radius), 2); // Area
+                        break;
+                    case "Rectangular Prism": // Example for using thickness
+                        volume = parseFloat(length) * parseFloat(width) * parseFloat(thickness); // Volume with thickness
+                        break;
+                    default:
+                        volume = 0; // Default case if shape is not recognized
+                        break;
+                }
+            
+                return volume.toFixed(2); // Return formatted volume
             }
         });
     });

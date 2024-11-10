@@ -112,7 +112,8 @@
                             />
                             <Button
                                 id="idSimulateBtn"
-                                text="Simulate"
+                                text="Calulcate Volume"
+                                press="onVolume"
                                 icon="sap-icon://simulate"
                                 class="sapUiSmallMarginBegin"
                             />
@@ -279,7 +280,7 @@
                                         value="{oMaterial>/Thickness}"
                                     />
 
-                                    <Label
+                                    <!-- <Label
                                         id="_IDGddsadsfwsbsdHome1"
                                         text="Volume"
                                         class="sapUiTinyMarginTop sapUiTinyMarginEnd"
@@ -290,7 +291,7 @@
                                         class="sapUiSmallMarginEnd sapUiLargeMarginBegin"
                                         width="15vw"
                                         value="{oMaterial>/Volume}"
-                                    />
+                                    /> -->
                                 </f:SimpleForm>
                             </HBox>
                         </VBox>
