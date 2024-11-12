@@ -3,10 +3,12 @@ sap.ui.define([
     "sap/base/i18n/ResourceBundle",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/odata/v2/ODataModel",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
 
 ],
-    function (Controller, ResourceBundle, JSONModel, ODataModel, MessageBox) {
+    function (Controller, ResourceBundle, JSONModel, ODataModel, MessageBox, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("com.sap.capacity.controller.Home", {
@@ -75,8 +77,7 @@ sap.ui.define([
                 /**Setting named model */
                 this.getView().setModel(oMatData, "oMaterial");
                 /**For changing language */
-                sap.ui.getCore().getConfiguration().setLanguage('te');
-
+                //sap.ui.getCore().getConfiguration().setLanguage('te');
             },
 
             onItemSelect: function (oEvent) {
@@ -297,6 +298,85 @@ sap.ui.define([
                 }
 
                 return volume.toFixed(2); // Return formatted volume
+            },
+            onAddUser: function () {
+                var oDoc = this.byId("nameText").getValue(); // Get input value
+                const oModel = this.getView().byId("pageContainer").getModel("newModel"); // Get model
+                var oFilter = new Filter('order_id', FilterOperator.Contains, oDoc); // Create filter
+                var that = this; // Preserve context
+
+                // Read data with filter applied
+                oModel.read("/OrderItems", {
+                    urlParameters: {
+                        "$expand": "material,order" // Specify related entities to expand
+                    },
+                    filters: [oFilter], // Apply filter
+                    success: function (odata) {
+                        console.log("OData Response:", odata); // Log the entire response
+
+                        // Clear previous binding
+                        that.getView().byId("myTable").unbindItems();
+
+                        // Create an array to hold the items for binding
+                        var itemsArray = [];
+
+                        // Loop through the OData response and extract relevant data
+                        if (odata && odata.results) {
+                            odata.results.forEach(function (item) {
+                                itemsArray.push({
+                                    id: item.id,
+                                    materialDescription: item.material ? item.material.Description : "", // Handle potential null values
+                                    order_id: item.order_id,
+                                    materialid: item.material_MaterialID,
+                                    quantity: item.quantity
+                                });
+                            });
+
+                        }
+
+                        // Create a new JSON model with the items array
+                        var JModel = new JSONModel({ OrderItems: itemsArray });
+                        that.getView().byId("myTable").setModel(JModel, "globalModel");
+
+                        // Bind items to the table
+                        that.getView().byId("myTable").bindItems({
+                            path: "globalModel>/OrderItems",
+                            template: new sap.m.ColumnListItem({
+                                cells: [
+                                    new sap.m.Text({ text: "{globalModel>id}" }),
+                                    new sap.m.Text({ text: "{globalModel>materialDescription}" }), // Accessing material description from custom property
+                                    new sap.m.Text({ text: "{globalModel>order_id}" }),
+                                    new sap.m.Text({ text: "{globalModel>quantity}" }),
+                                    new sap.m.Text({ text: "{globalModel>materialid}" })
+                                ]
+                            })
+                        });
+                    },
+                    error: function (oError) {
+                        console.log("Error fetching data:", oError); // Log errors if any occur
+                    }
+                });
+            },
+            /**Reading Truck Data */
+            getTruck: function () {
+                var otruck = this.byId("_IDGenInput").getValue();
+
+                var oFilter = new sap.ui.model.Filter('id', sap.ui.model.FilterOperator.EQ, otruck);
+                const oModel = this.getView().byId("pageContainer").getModel("newModel");
+                var that = this;
+                oModel.read("/Vehicle", {
+                    filters: [oFilter], success: function (odata) {
+                        console.log(odata);
+                    },
+                    error: function (oError) {
+
+                    }
+                })
             }
+
         });
     });
+
+
+
+

@@ -10,6 +10,10 @@ type ShapeTypes : String enum {
     Cone;
 }
 
+
+//define data type for key
+type stringkey : String(10); 
+
 //defining material entity
 entity Material {
     key MaterialID    : String; // Unique identifier for the material
@@ -34,7 +38,7 @@ entity Material {
 
 /**defining orders entity */
 entity Orders {
-    key id           : UUID; // Unique identifier for each order
+    key id           : stringkey; // Unique identifier for each order
         orderDate    : Date; // Date when the order was placed
         customerName : String; // Name of the customer
         status       : String; // Current status of the order (e.g., Pending, Completed)
@@ -44,14 +48,14 @@ entity Orders {
 
 /**definiing orderitems */
 entity OrderItems {
-    key id       : UUID; // Unique identifier for each order item
+    key id       : stringkey; // Unique identifier for each order item
         order    : Association to Orders; // Reference to the associated order
         material : Association to Material; // Reference to the material being ordered
         quantity : Integer; // Quantity of the material ordered
 }
 
 entity Vehicle {
-    key id           : UUID; // Unique identifier for each vehicle
+    key id           : stringkey; // Unique identifier for each vehicle
         licensePlate : String; // License plate number of the vehicle
         type         : String; // Type of vehicle (e.g., Truck, Van)
         capacity     : Integer; // Maximum capacity of the vehicle (e.g., weight limit)
@@ -59,7 +63,7 @@ entity Vehicle {
 
 /** Defining VehicleLoad entity */
 entity VehicleLoad {
-    key id             : UUID; // Unique identifier for each vehicle load entry
+    key id             : stringkey; // Unique identifier for each vehicle load entry
         vehicle        : Association to Vehicle; // Reference to the associated vehicle
         orderItem      : Association to OrderItems; // Reference to the associated order item
         loadedQuantity : Integer; // Quantity of the order item loaded into the vehicle
